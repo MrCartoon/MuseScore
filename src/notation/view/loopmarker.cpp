@@ -77,7 +77,7 @@ RectF LoopMarker::resolveMarkerRectByTick(muse::midi::tick_t _tick) const
         int x1 = s->canvasPos().x();
         qreal x2 = 0.0;
         Fraction t2;
-        // mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
+        mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
 
         // if (ns) {
         //     t2 = ns->tick();

@@ -74,10 +74,10 @@ muse::RectF PlaybackCursor::resolveCursorRectByTick(muse::midi::tick_t _tick) co
         qreal x2 = 0.0;
         Fraction t2;
 
-        // mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
-        // while (ns && !ns->visible()) {
-        //     ns = ns->next(mu::engraving::SegmentType::ChordRest);
-        // }
+        mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
+        while (ns && !ns->visible()) {
+            ns = ns->next(mu::engraving::SegmentType::ChordRest);
+        }
 
         // if (ns) {
         //     t2 = ns->tick();
