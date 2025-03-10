@@ -87,7 +87,7 @@ muse::RectF PlaybackCursor::resolveCursorRectByTick(muse::midi::tick_t _tick) co
             // measure->width is not good enough because of courtesy keysig, timesig
             mu::engraving::Segment* seg = measure->findSegment(mu::engraving::SegmentType::EndBarLine, measure->tick() + measure->ticks());
             if (seg) {
-                x2 = seg->canvasPos().x();
+                x2 = seg->canvasPos().x() + seg->width();
             } else {
                 x2 = measure->canvasPos().x() + measure->width(); // safety, should not happen
             }
