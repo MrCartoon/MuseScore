@@ -72,12 +72,13 @@ RectF LoopMarker::resolveMarkerRectByTick(muse::midi::tick_t _tick) const
     const Fraction offset = { 0, 1 };
 
     mu::engraving::Segment* s = nullptr;
-    for (s = measure->first(mu::engraving::SegmentType::ChordRest); s;) {
+    // for (s = measure->first(mu::engraving::SegmentType::ChordRest); s;) {
+        s = measure->first();
         Fraction t1 = s->tick();
         int x1 = s->canvasPos().x();
         qreal x2 = 0.0;
         Fraction t2;
-        mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
+        // mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
 
         // if (ns) {
         //     t2 = ns->tick();
@@ -100,8 +101,8 @@ RectF LoopMarker::resolveMarkerRectByTick(muse::midi::tick_t _tick) const
             break;
         }
 
-        s = ns;
-    }
+    //     s = ns;
+    // }
 
     if (s == nullptr) {
         return RectF();
