@@ -68,44 +68,44 @@ muse::RectF PlaybackCursor::resolveCursorRectByTick(muse::midi::tick_t _tick) co
 
     qreal x = 0.0;
     mu::engraving::Segment* s = nullptr;
-    for (s = measure->first(); s;) {
-        s = measure->first();
-        Fraction t1 = s->tick();
-        int x1 = s->canvasPos().x();
-        qreal x2 = 0.0;
-        Fraction t2;
+    // for (s = measure->first(); s;) {
+    //     s = measure->first();
+    //     Fraction t1 = s->tick();
+    //     int x1 = s->canvasPos().x();
+    //     qreal x2 = 0.0;
+    //     Fraction t2;
 
-        mu::engraving::Segment* ns = s->next();
-        while (ns && !ns->visible()) {
-            ns = ns->next();
-        }
+    //     mu::engraving::Segment* ns = s->next();
+    //     while (ns && !ns->visible()) {
+    //         ns = ns->next();
+    //     }
 
-        // if (ns) {
-        //     t2 = ns->tick();
-        //     x2 = ns->canvasPos().x();
-        // } else {
-        //     t2 = measure->endTick();
-        //     // measure->width is not good enough because of courtesy keysig, timesig
-        //     mu::engraving::Segment* seg = measure->findSegment(mu::engraving::SegmentType::EndBarLine, measure->tick() + measure->ticks());
-        //     if (seg) {
-        //         x2 = seg->canvasPos().x() + seg->width();
-        //     } else {
-        //         x2 = measure->canvasPos().x() + measure->width(); // safety, should not happen
-        //     }
-        // }
+    //     // if (ns) {
+    //     //     t2 = ns->tick();
+    //     //     x2 = ns->canvasPos().x();
+    //     // } else {
+    //     //     t2 = measure->endTick();
+    //     //     // measure->width is not good enough because of courtesy keysig, timesig
+    //     //     mu::engraving::Segment* seg = measure->findSegment(mu::engraving::SegmentType::EndBarLine, measure->tick() + measure->ticks());
+    //     //     if (seg) {
+    //     //         x2 = seg->canvasPos().x() + seg->width();
+    //     //     } else {
+    //     //         x2 = measure->canvasPos().x() + measure->width(); // safety, should not happen
+    //     //     }
+    //     // }
 
-        // Test if just width is smooth
-        t2 = measure->endTick();
-        x2 = measure->canvasPos().x() + measure->width();
+    //     // Test if just width is smooth
+    //     t2 = measure->endTick();
+    //     x2 = measure->canvasPos().x() + measure->width();
 
-        if (tick >= t1 && tick < t2) {
-            Fraction dt = t2 - t1;
-            qreal dx = x2 - x1;
-            x = x1 + dx * (tick - t1).ticks() / dt.ticks();
-            break;
-        }
-        s = ns;
-    }
+    //     if (tick >= t1 && tick < t2) {
+    //         Fraction dt = t2 - t1;
+    //         qreal dx = x2 - x1;
+    //         x = x1 + dx * (tick - t1).ticks() / dt.ticks();
+    //         break;
+    //     }
+    //     s = ns;
+    // }
 
     if (!s) {
         return RectF();

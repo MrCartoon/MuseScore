@@ -72,36 +72,36 @@ RectF LoopMarker::resolveMarkerRectByTick(muse::midi::tick_t _tick) const
     const Fraction offset = { 0, 1 };
 
     mu::engraving::Segment* s = nullptr;
-    for (s = measure->first(); s;) {
-        Fraction t1 = s->tick();
-        int x1 = s->canvasPos().x();
-        qreal x2 = 0.0;
-        Fraction t2;
-        mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
+    // for (s = measure->first(); s;) {
+    //     Fraction t1 = s->tick();
+    //     int x1 = s->canvasPos().x();
+    //     qreal x2 = 0.0;
+    //     Fraction t2;
+    //     mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
 
-        // if (ns) {
-        //     t2 = ns->tick();
-        //     x2 = ns->canvasPos().x();
-        // } else {
-        //     t2 = measure->endTick();
-        //     x2 = measure->canvasPos().x() + measure->width();
-        // }
+    //     // if (ns) {
+    //     //     t2 = ns->tick();
+    //     //     x2 = ns->canvasPos().x();
+    //     // } else {
+    //     //     t2 = measure->endTick();
+    //     //     x2 = measure->canvasPos().x() + measure->width();
+    //     // }
 
-        t2 = measure->endTick();
-        x2 = measure->canvasPos().x() + measure->width();
+    //     t2 = measure->endTick();
+    //     x2 = measure->canvasPos().x() + measure->width();
 
-        t1 += offset;
-        t2 += offset;
+    //     t1 += offset;
+    //     t2 += offset;
 
-        if (tick >= t1 && tick < t2) {
-            Fraction dt = t2 - t1;
-            qreal dx = x2 - x1;
-            x = x1 + dx * (tick - t1).ticks() / dt.ticks();
-            break;
-        }
+    //     if (tick >= t1 && tick < t2) {
+    //         Fraction dt = t2 - t1;
+    //         qreal dx = x2 - x1;
+    //         x = x1 + dx * (tick - t1).ticks() / dt.ticks();
+    //         break;
+    //     }
 
-        s = ns;
-    }
+    //     s = ns;
+    // }
 
     if (s == nullptr) {
         return RectF();
