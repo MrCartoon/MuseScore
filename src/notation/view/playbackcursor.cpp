@@ -74,24 +74,28 @@ muse::RectF PlaybackCursor::resolveCursorRectByTick(muse::midi::tick_t _tick) co
         qreal x2 = 0.0;
         Fraction t2;
 
-        mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
-        while (ns && !ns->visible()) {
-            ns = ns->next(mu::engraving::SegmentType::ChordRest);
-        }
+        // mu::engraving::Segment* ns = s->next(mu::engraving::SegmentType::ChordRest);
+        // while (ns && !ns->visible()) {
+        //     ns = ns->next(mu::engraving::SegmentType::ChordRest);
+        // }
 
-        if (ns) {
-            t2 = ns->tick();
-            x2 = ns->canvasPos().x();
-        } else {
-            t2 = measure->endTick();
-            // measure->width is not good enough because of courtesy keysig, timesig
-            mu::engraving::Segment* seg = measure->findSegment(mu::engraving::SegmentType::EndBarLine, measure->tick() + measure->ticks());
-            if (seg) {
-                x2 = seg->canvasPos().x() + seg->width();
-            } else {
-                x2 = measure->canvasPos().x() + measure->width(); // safety, should not happen
-            }
-        }
+        // if (ns) {
+        //     t2 = ns->tick();
+        //     x2 = ns->canvasPos().x();
+        // } else {
+        //     t2 = measure->endTick();
+        //     // measure->width is not good enough because of courtesy keysig, timesig
+        //     mu::engraving::Segment* seg = measure->findSegment(mu::engraving::SegmentType::EndBarLine, measure->tick() + measure->ticks());
+        //     if (seg) {
+        //         x2 = seg->canvasPos().x() + seg->width();
+        //     } else {
+        //         x2 = measure->canvasPos().x() + measure->width(); // safety, should not happen
+        //     }
+        // }
+
+        // Test if just width is smooth
+        t2 = measure->endTick();
+        x2 = measure->canvasPos().x() + measure->width();
 
         if (tick >= t1 && tick < t2) {
             Fraction dt = t2 - t1;
